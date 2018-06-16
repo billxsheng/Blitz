@@ -17,7 +17,7 @@ const authCheck = (req, res, next) => {
     }
 };
 
-router.get('/', ensureAuthenticated, (req, res) => {
+router.get('/', (req, res) => {
     var url_parts = url.parse(req.url, true);
     var query = url_parts.query;
     console.log(query);
@@ -44,7 +44,7 @@ router.post('/save', urlencodedParser, (req, res) => {
             team.team = req.body.team
             console.log(team);
             team.save().then(() => {
-                res.send('Successfully created new team!'); 
+                res.send('Successfully updated!'); 
             });
         }).catch((e) => {
             //update
@@ -56,6 +56,7 @@ router.post('/save', urlencodedParser, (req, res) => {
 
 function ensureAuthenticated(req, res, next){
     if(req.isAuthenticated()) {
+        
         return next();
     } else {
         res.render('login', {

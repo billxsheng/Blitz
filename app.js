@@ -1,7 +1,6 @@
 const express = require('express');
 const profileRoutes = require('./routes/profile-routes');
 const authRoutes = require('./routes/auth-routes');
-const passportSetup = require('./config/passport-setup');
 const mongoose = require('mongoose');
 const keys = require('./db/keys');
 const cookieSession = require('cookie-session');
@@ -16,6 +15,10 @@ const querystring = require('querystring');
 const url = require('url');    
 const httpTransport = require('https');
 const btoa = require('btoa');
+
+//mongodb
+mongoose.Promise = global.Promise;
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/Blitz');
 
 //express app
 const app = express();
@@ -124,7 +127,7 @@ app.post('/profile', [urlencodedParser, inputCheck, accountCheck,
     passport.authenticate('local-login')],
     function (req, res) {
         res.redirect(url.format({
-            pathname:"/profile/",
+            pathname:"/profile",
             query: {
                 "fn": req.user.firstName,
                 "ln": req.user.lastName,
