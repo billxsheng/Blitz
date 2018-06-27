@@ -17,7 +17,7 @@ const authCheck = (req, res, next) => {
     }
 };
 
-router.get('/', (req, res) => {
+router.get('/', ensureAuthenticated, (req, res) => {
     var url_parts = url.parse(req.url, true);
     var query = url_parts.query;
     console.log(query);
@@ -56,9 +56,10 @@ router.post('/save', urlencodedParser, (req, res) => {
 
 function ensureAuthenticated(req, res, next){
     if(req.isAuthenticated()) {
-        
+        console.log('yes');
         return next();
     } else {
+        console.log('no');
         res.render('login', {
             error:"You are not logged in."
         })

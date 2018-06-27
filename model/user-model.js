@@ -51,8 +51,8 @@ module.statics.findByCredentials = function(email, password) {
 
 }
 
-module.exports.getUserById = function(username, callback) {
-var query = {username: username};
-User.findOne(query, callback);
+module.exports.getUserById = function(email, callback) {
+var query = {email: email};
+return User.findOne(query, callback);
 };
 

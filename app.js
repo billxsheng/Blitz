@@ -5,16 +5,12 @@ const mongoose = require('mongoose');
 const keys = require('./db/keys');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
-const hbs = require('hbs');
 const path = require('path');
 const User = require('./model/user-model');
 const bodyParser = require('body-parser');
-var LocalStrategy = require('passport-local').Strategy;
-var mongodb = require('mongodb');
-const querystring = require('querystring');    
+var LocalStrategy = require('passport-local').Strategy;  
 const url = require('url');    
-const httpTransport = require('https');
-const btoa = require('btoa');
+const cookieParser = require('cookie-parser');
 
 //mongodb
 mongoose.Promise = global.Promise;
@@ -34,10 +30,14 @@ const port = process.env.PORT || 3000
 app.use(express.static(path.join(__dirname, '/views')));
 
 //cookie session
+app.use(cookieParser(keys.cookie.session));
+
+
 app.use(cookieSession({
     maxAge: 24 * 60 * 60 * 1000,
     keys: [keys.cookie.session]
 }));
+
 
 //initialize passport
 app.use(passport.initialize());
@@ -76,9 +76,9 @@ passport.serializeUser(function (user, done) {
 
 //deserialize 
 passport.deserializeUser(function (id, done) {
-    User.getUserById(id, function (err, user) {
+    User.findById(id, (err, user) => {
         done(err, user);
-    });
+    })
 });
 
 
@@ -123,11 +123,12 @@ passport.use('local-login', new LocalStrategy({
 ));
 
 //Login POST 
-app.post('/profile', [urlencodedParser, inputCheck, accountCheck,
+app.post('/login/redirect', [urlencodedParser, inputCheck, accountCheck,
     passport.authenticate('local-login')],
     function (req, res) {
+        console.log('redirect');
         res.redirect(url.format({
-            pathname:"/profile",
+            pathname:"/profile/",
             query: {
                 "fn": req.user.firstName,
                 "ln": req.user.lastName,
