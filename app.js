@@ -143,13 +143,15 @@ app.get('/logout', (req, res) => {
     res.render('login');
 });
 
-//set interval
-//for each user
-    //fetch team
-    //fetch data
-    //check array of games already checked
-        //if it is there do nothing
-        //if not send message
+
+setInterval(() => {
+    //for each game that finishes
+        //fetch teams involved
+            //rotate through users 
+                //if user matches team send text
+                //if not do nothing
+}, 600000);
+
     
 
 
