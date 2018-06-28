@@ -8,12 +8,15 @@ var teamSchema = mongoose.Schema({
 
 var Team = module.statics = module.exports = mongoose.model('Team', teamSchema);
 
-module.statics.userExists = function(phone) {
+module.statics.userExists = function(email) {
     var Team = this;
-    return Team.findOne({phone}).then((user) => {
+    return Team.findOne({email}).then((user) => {
         if(user) {
+            console.log('user found');
             return Promise.reject();
         } else {
+            console.log('user not found');
+
             Promise.resolve();
         }
     })

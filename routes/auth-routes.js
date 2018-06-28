@@ -1,9 +1,7 @@
 const router = require('express').Router();
 const passport = require('passport');
-const hbs = require('hbs');
 const bodyParser = require('body-parser');
 const User = require('../model/user-model');
-var localStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 var nodemailer = require('nodemailer');
 
