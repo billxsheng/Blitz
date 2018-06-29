@@ -8,5 +8,8 @@ module.exports = {
     },
     cookie: {
         session: 'lexington'
+    },
+    api: {
+        password: 'foxtrotdock'
     }
 }
