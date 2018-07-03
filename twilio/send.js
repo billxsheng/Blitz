@@ -5,15 +5,18 @@ var authToken = keys.twilio.authToken;
 
 var twilio = require('twilio');
 var client = new twilio(accountSid, authToken);
-//test
-client.messages.create({
-    body:`Blitz: `,
-    to:  keys.twilio.personalNum,
-    from: keys.twilio.twilioNum
-}).then((message) => {
-    console.log(message.sid);
-});
 
-module.exports = {
-    client
+
+exports.send = function(mobile, homeTeam, awayTeam, homeScore, awayScore, other) {
+    client.messages.create({
+        body:`Blitz: 
+                Final Score:
+                ${awayTeam}: ${awayScore}
+                ${homeTeam}: ${homeScore}`,
+        to:  mobile,
+        from: keys.twilio.twilioNum
+    }).then((message) => {
+        console.log(message.sid);
+    });
 }
+

@@ -13,7 +13,8 @@ const url = require('url');
 const cookieParser = require('cookie-parser');
 const api = require('./api/api');
 const Game = require('./model/game-model');
-
+const Team = require('./model/team-model');
+const Message = require('./twilio/send');
 //mongodb
 mongoose.Promise = global.Promise;
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/Blitz');
@@ -148,18 +149,21 @@ app.get('/logout', (req, res) => {
 //setInterval(() => {
     var data = api.getData().then((result) => {
         for(i = 0; i < result.scoreboard.gameScore.length; i++ ) {
-            
+            console.log(data.scoreboard);
             console.log(`Parsing ${result.scoreboard.gameScore[i].game.homeTeam.Abbreviation} vs ${result.scoreboard.gameScore[i].game.awayTeam.Abbreviation}`)
             if(result.scoreboard.gameScore[i].isCompleted === "true") {
                 console.log(i);
                 //check if game is in array
                     //if game is in array dont do anything
                     //if game is not in array
+                        Team.find({team: result.scoreboard} || {team:result.scoreboard}).array.forEach(user => {
+                            // Message.send();
+                        });
                         //for each user check if the teams match  .find(team).foreach
                             //if they do match, send custom message
                             //if they do not match dont do anything
                         //add game to array
-
+                        
 
 
 
