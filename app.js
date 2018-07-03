@@ -11,6 +11,8 @@ const bodyParser = require('body-parser');
 var LocalStrategy = require('passport-local').Strategy;  
 const url = require('url');    
 const cookieParser = require('cookie-parser');
+const api = require('./api/api');
+const Game = require('./model/game-model');
 
 //mongodb
 mongoose.Promise = global.Promise;
@@ -143,14 +145,84 @@ app.get('/logout', (req, res) => {
     res.render('login');
 });
 
+//setInterval(() => {
+    var data = api.getData().then((result) => {
+        for(i = 0; i < result.scoreboard.gameScore.length; i++ ) {
+            
+            console.log(`Parsing ${result.scoreboard.gameScore[i].game.homeTeam.Abbreviation} vs ${result.scoreboard.gameScore[i].game.awayTeam.Abbreviation}`)
+            if(result.scoreboard.gameScore[i].isCompleted === "true") {
+                console.log(i);
+                //check if game is in array
+                    //if game is in array dont do anything
+                    //if game is not in array
+                        //for each user check if the teams match  .find(team).foreach
+                            //if they do match, send custom message
+                            //if they do not match dont do anything
+                        //add game to array
 
-setInterval(() => {
+
+
+
+
+
+
+
+                // gameCheck().then(() => {
+                //     console.log('text sent to ' + result.scoreboard.gameScore[i].game.ID)
+                //     //send text
+                // }).catch(() => {
+                //     console.log(1);
+                // });
+
+                // newGameCheck().then(() => {
+                //     var game = new Game({
+                //         game: result.scoreboard.gameScore[i].game.ID
+                //     });
+                //     game.save().then(() => {
+                //         console.log('Game saved to DB!')
+                //     });
+                // }).catch(() => {
+                    
+                // });
+
+                // async function gameCheck() {
+                //     await Game.gameExists(result.scoreboard.gameScore[i].game.ID)
+                // }
+                
+                // async function newGameCheck() {
+                //     await Game.gameExists(result.scoreboard.gameScore[i].game.ID)
+                // } 
+                
+                
+            } else {
+                console.log('Game still in progress');
+            }
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+        }
+
+
+    }).catch((e) => {
+        console.log(e);
+    })
+    
+
     //for each game that finishes
+        //check if finished game is in arrayChecked
         //fetch teams involved
             //rotate through users 
                 //if user matches team send text
-                //if not do nothing
-}, 600000);
+
+//}, 1000);
 
     
 
