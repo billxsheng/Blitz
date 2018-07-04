@@ -28,7 +28,7 @@ router.post('/save', urlencodedParser, (req, res) => {
     console.log(req.query);
     if (req.body.mobile === "") {
         console.log('error detected');
-        res.redirect('profile', {
+        res.render('profile', {
             error: "Please enter a valid phone number."
         });
     } else {

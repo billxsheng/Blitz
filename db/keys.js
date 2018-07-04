@@ -11,5 +11,10 @@ module.exports = {
     },
     api: {
         password: 'foxtrotdock'
+    },
+    twilio: {
+        accountSid: 'ACceade3db38c9a033210ff2657ee551bf',
+        authToken:'c3df5cbba15631b9450aa17b7c4e8a14',
+        twilioNum: '6476966287' 
     }
 }

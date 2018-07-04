@@ -5,55 +5,58 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link type="text/css" rel="stylesheet" href="/./style.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+        crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700" rel="stylesheet">
     <title>Profile</title>
 </head>
 
 <body>
     <div class="main-profile">
-        <div class="home-profile container"> <img src="/media/billlogo3.png">
+        <div class="home-profile container">
+            <img src="/media/billlogo3.png">
             <h1 class="welcome">Welcome {{firstName}}! </h1>
             <div class="signedinwith">Signed in with email: {{email}}</div>
             <br>
             <h3>Edit Team Information</h3>
             <form method="POST" action="/profile/save" class="container">
                 <input name="mobile" class="phoneInput" type="tel" placeholder="Mobile Number" autofocus autocomplete="off">
-                
+
                 <div class="form-group team-selector">
                     <h3 class="teamSelect">Select a team</h3>
                     <select name="team" class="form-control" id="sel1">
-                        <option>Arizona Cardinals</option>
-                        <option>Atlanta Falcons</option>
-                        <option>Baltimore Ravens</option>
-                        <option>Buffalo Bills</option>
-                        <option>Carolina Panthers</option>
-                        <option>Chicago Bears</option>
-                        <option>Cincinnati Bengals</option>
-                        <option>Cleveland Browns</option>
-                        <option>Dallas Cowboys</option>
-                        <option>Denver Broncos</option>
-                        <option>Detroit Lions</option>
-                        <option>Green Bay Packers</option>
-                        <option>Houston Texans</option>
-                        <option>Indianapolis Colts</option>
-                        <option>Jacksonville Jaguars</option>
-                        <option>Kansas City Chiefs</option>
-                        <option>Minnesota Vikings</option>
-                        <option>New England Patriots</option>
-                        <option>New Orleans Saints</option>
-                        <option>New York Giants</option>
-                        <option>New York Jets</option>
-                        <option>Oakland Raiders</option>
-                        <option>Philadelphia Eagles</option>
-                        <option>Pittsburgh Steelers</option>
-                        <option>Los Angeles Rams</option>
-                        <option>San Diego Chargers</option>
-                        <option>San Francisco 49ers</option>
-                        <option>Seattle Seahawks</option>
-                        <option>Tampa Bay Buccaneers</option>
-                        <option>Tennessee Titans</option>
-                        <option>Washington Redskins</option>
+                        <option value="ARI">Arizona Cardinals</option>
+                        <option value="ATL">Atlanta Falcons</option>
+                        <option value="BAL">Baltimore Ravens</option>
+                        <option value="BUF">Buffalo Bills</option>
+                        <option value="CAR">Carolina Panthers</option>
+                        <option value="CHI">Chicago Bears</option>
+                        <option value="CIN">Cincinnati Bengals</option>
+                        <option value="CLE">Cleveland Browns</option>
+                        <option value="DAL">Dallas Cowboys</option>
+                        <option value="DEN">Denver Broncos</option>
+                        <option value="DET">Detroit Lions</option>
+                        <option value="GB">Green Bay Packers</option>
+                        <option value="HOU">Houston Texans</option>
+                        <option value="IND">Indianapolis Colts</option>
+                        <option value="JAX">Jacksonville Jaguars</option>
+                        <option value="KC">Kansas City Chiefs</option>
+                        <option value="LAC">Los Angeles Chargers</option>
+                        <option value="LAR">Los Angeles Rams</option>
+                        <option value="MIA">Miami Dolphins</option>
+                        <option value="MIN">Minnesota Vikings</option>
+                        <option value="NE">New England Patriots</option>
+                        <option value="NO">New Orleans Saints</option>
+                        <option value="NYG">New York Giants</option>
+                        <option value="NYJ">New York Jets</option>
+                        <option value="OAK">Oakland Raiders</option>
+                        <option value="PHI">Philadelphia Eagles</option>
+                        <option value="PIT">Pittsburgh Steelers</option>
+                        <option value="SF">San Francisco 49ers</option>
+                        <option value="SEA">Seattle Seahawks</option>
+                        <option value="TB">Tampa Bay Buccaneers</option>
+                        <option value="TEN">Tennessee Titans</option>
+                        <option value="WAS">Washington Redskins</option>
                     </select>
                 </div>
                 <br>
@@ -62,12 +65,17 @@
                 <br>
                 <input id="btn-save" value="Save" type="submit" class="btn btn-login btn-main2 btn-team-submit">
             </form>
-            <div class="container"> <a href="/logout" class="btn btn-login btn-main2 btn-logout">Logout</a> </div>
+            <div class="container">
+                <a href="/logout" class="btn btn-login btn-main2 btn-logout">Logout</a>
+            </div>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+        crossorigin="anonymous"></script>
     <script src="../client/profile.js"></script>
 </body>
 
