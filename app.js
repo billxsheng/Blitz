@@ -14,6 +14,7 @@ const cookieParser = require('cookie-parser');
 const api = require('./api/api');
 const Game = require('./model/game-model');
 const Message = require('./twilio/send');
+const async = require('async');
 
 //mongodb
 mongoose.Promise = global.Promise;
