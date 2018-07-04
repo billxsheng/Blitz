@@ -13,6 +13,7 @@ const url = require('url');
 const cookieParser = require('cookie-parser');
 const api = require('./api/api');
 const Team = require('./model/team-model');
+const Game = require('./model/game-model');
 const Message = require('./twilio/send');
 
 //mongodb
@@ -158,20 +159,41 @@ api.getData().then((result) => {
             console.log(`Parsing ${result.scoreboard.gameScore[i].game.homeTeam.Abbreviation} vs ${result.scoreboard.gameScore[i].game.awayTeam.Abbreviation}`)
             if (result.scoreboard.gameScore[i].isCompleted === "true") {
                 console.log(i);
-                //check if game is in array
-                //if game is in array dont do anything
-                //if game is not in array
                 var gameJSON = result.scoreboard.gameScore[i]
-                Team.find({
-                    team: gameJSON.game.awayTeam.Abbreviation
-                ,
-                    team: gameJSON.game.homeTeam.Abbreviation
-                }).then((users) => {
-                    users.forEach((user) => {
-                        console.log(user);
-                        Message.send(user.mobile, gameJSON.game.homeTeam.City, gameJSON.game.homeTeam.Name, gameJSON.game.awayTeam.City, gameJSON.game.awayTeam.Name, gameJSON.homeScore, gameJSON.awayScore, null );
-                    })
+
+                Game.findOne({game: gameJSON.game.ID}).then((game) => {
+                    if(game) {
+                        console.log('0 returned');
+                        return 0;
+                    } else {
+                        console.log(gameJSON.game.ID);
+                        Team.find({
+                            team: gameJSON.game.awayTeam.Abbreviation
+                        ,
+                            team: gameJSON.game.homeTeam.Abbreviation
+                        }).then((users) => {
+                            console.log(gameJSON.game.awayTeam.Abbreviation);
+                            console.log(gameJSON.game.homeTeam.Abbreviation);
+                            users.forEach((user) => {
+                                console.log(user);
+                                //Message.send(user.mobile, gameJSON.game.homeTeam.City, gameJSON.game.homeTeam.Name, gameJSON.game.awayTeam.City, gameJSON.game.awayTeam.Name, gameJSON.homeScore, gameJSON.awayScore, null );
+                            })
+                            var game = new Game({
+                                game: gameJSON.game.ID
+                            })
+                            
+                            game.save().then((game) => {
+                                console.log(`Game with ID: ${game.game} saved to DB.`)
+                            }).catch((e) => {
+                                console.log('Error! Game not saved to DB.');
+                            });
+        
+                        })
+                    }
+                }).catch(() => {
+                    
                 })
+                
             } else {
                 console.log('Game still in progress');
             }
@@ -183,8 +205,8 @@ api.getData().then((result) => {
         }
     }
 
-    asyncLoop( 0, function() {
-        // put the code that should happen after the loop here
+    asyncLoop( 0, () => {
+        
     });
 
 
@@ -197,10 +219,9 @@ api.getData().then((result) => {
 
 
 
-            //for each user check if the teams match  .find(team).foreach
-            //if they do match, send custom message
-            //if they do not match dont do anything
-            //add game to array
+           
+            
+           
 
 
 
@@ -249,11 +270,7 @@ api.getData().then((result) => {
 
 
 
-//for each game that finishes
-//check if finished game is in arrayChecked
-//fetch teams involved
-//rotate through users 
-//if user matches team send text
+
 
 //}, 1000);
 
