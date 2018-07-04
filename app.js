@@ -15,6 +15,7 @@ const api = require('./api/api');
 const Game = require('./model/game-model');
 const Message = require('./twilio/send');
 const async = require('async');
+const algorithm = require('./algorithm/algorithm');
 
 //mongodb
 mongoose.Promise = global.Promise;
@@ -152,131 +153,12 @@ app.get('/logout', (req, res) => {
     res.render('login');
 });
 
-//setInterval(() => {
-api.getData().then((result) => {
-    function asyncLoop(i, callback) {
-        if (i < result.scoreboard.gameScore.length) {
-            console.log(`Parsing ${result.scoreboard.gameScore[i].game.homeTeam.Abbreviation} vs ${result.scoreboard.gameScore[i].game.awayTeam.Abbreviation}`)
-            if (result.scoreboard.gameScore[i].isCompleted === "true") {
-                console.log(i);
-                var gameJSON = result.scoreboard.gameScore[i]
-
-                Game.findOne({game: gameJSON.game.ID}).then((game) => {
-                    if(game) {
-                        console.log('0 returned');
-                        return 0;
-                    } else {
-                        console.log(gameJSON.game.ID);
-                        User.find({
-                            team: gameJSON.game.awayTeam.Abbreviation
-                        ,
-                            team: gameJSON.game.homeTeam.Abbreviation
-                        }).then((users) => {
-                            console.log(users + 'USERS ARRAY');
-                            console.log(gameJSON.game.awayTeam.Abbreviation);
-                            console.log(gameJSON.game.homeTeam.Abbreviation);
-                            users.forEach((user) => {
-                                console.log(user);
-                                //Message.send(user.mobile, gameJSON.game.homeTeam.City, gameJSON.game.homeTeam.Name, gameJSON.game.awayTeam.City, gameJSON.game.awayTeam.Name, gameJSON.homeScore, gameJSON.awayScore, null );
-                            })
-                            var game = new Game({
-                                game: gameJSON.game.ID
-                            })
-                            
-                            // game.save().then((game) => {
-                            //     console.log(`Game with ID: ${game.game} saved to DB.`)
-                            // }).catch((e) => {
-                            //     console.log('Error! Game not saved to DB.');
-                            // });
-        
-                        })
-                    }
-                }).catch(() => {
-                    
-                })
-                
-            } else {
-                console.log('Game still in progress');
-            }
-
-            asyncLoop( i + 1, callback );
-
-        } else {
-            callback();
-        }
-    }
-
-    asyncLoop( 0, () => {
-        
-    });
-
-
-}).catch((e) => {
-    console.log(e);
-})
-
-  
-
-
-
-
-           
-            
-           
-
-
-
-
-
-
-
-
-            // gameCheck().then(() => {
-            //     console.log('text sent to ' + result.scoreboard.gameScore[i].game.ID)
-            //     //send text
-            // }).catch(() => {
-            //     console.log(1);
-            // });
-
-            // newGameCheck().then(() => {
-            //     var game = new Game({
-            //         game: result.scoreboard.gameScore[i].game.ID
-            //     });
-            //     game.save().then(() => {
-            //         console.log('Game saved to DB!')
-            //     });
-            // }).catch(() => {
-
-            // });
-
-            // async function gameCheck() {
-            //     await Game.gameExists(result.scoreboard.gameScore[i].game.ID)
-            // }
-
-            // async function newGameCheck() {
-            //     await Game.gameExists(result.scoreboard.gameScore[i].game.ID)
-            // } 
-
-
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//}, 1000);
-
-
 
 app.listen(port, () => {
     console.log(`app now up on port ${port}`);
 });
+
+
+//setInterval(() => {
+    algorithm.intervalAlg();
+//}, 2000);
