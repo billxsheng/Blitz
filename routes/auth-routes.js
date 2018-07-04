@@ -54,6 +54,8 @@ router.post('/signup/local', urlencodedParser, (req, res) => {
     user.firstName = req.body.firstName;
     user.lastName =req.body.lastName;
     user.email = req.body.email;
+    user.mobile = null;
+    user.team = null;
     //username
     user.password = req.body.password;
     User.emailVeri(req.body.email).then(() => {

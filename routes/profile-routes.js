@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const bodyParser = require('body-parser');
-const Team = require('../model/team-model');
+const User = require('../model/user-model');
 
 
 router.use(bodyParser.json());
@@ -19,7 +19,9 @@ router.get('/', ensureAuthenticated, (req, res) => {
     res.render('profile', {
         firstName: req.user.firstName,
         lastName: req.user.lastName,
-        email: req.user.email
+        email: req.user.email,
+        mobile: req.user.mobile,
+        team: req.user.team
     });
 });
 
@@ -32,29 +34,34 @@ router.post('/save', urlencodedParser, (req, res) => {
             error: "Please enter a valid phone number."
         });
     } else {
-        Team.userExists(req.body.email).then(() => {
-            var team = new Team();
-            team.email = req.query.email;
-            team.mobile = Math.trunc(req.body.mobile);
-            team.team = req.body.team
-            console.log(team);
-            team.save().then(() => {
-                res.send('New user information added!');
-            });
-        }).catch(() => {
-            Team.findOneAndUpdate({
-                email: req.body.email
-            }, {
-                email: req.query.email,
-                mobile: Math.trunc(req.body.mobile),
-                team: req.body.team
-            }, (err, res) => {
-                if (err) {
-                    console.log('An error occurred.')
-                } 
-            })
+        User.updateTeam(req.user.email, req.body.mobile, req.body.team).then(() => {
             res.send('User information successfully updated!')
-        })
+        }) ;
+        // Team.userExists(req.body.email).then(() => {
+        //     console.log(req.user.email + "email");
+        //     var team = new Team();
+        //     team.email = req.user.email;
+        //     team.mobile = Math.trunc(req.body.mobile);
+        //     team.team = req.body.team
+        //     console.log(team);
+        //     team.save().then(() => {
+        //         res.send('New user information added!');
+        //     });
+        // }).catch(() => {
+        //     console.log(req.user.email + "email");
+        //     Team.findOneAndUpdate({
+        //         email: req.body.email
+        //     }, {
+        //         email: req.query.email,
+        //         mobile: Math.trunc(req.body.mobile),
+        //         team: req.body.team
+        //     }, (err, res) => {
+        //         if (err) {
+        //             console.log('An error occurred.')
+        //         } 
+        //     })
+        //     res.send('User information successfully updated!')
+        // })
     }
 });
 

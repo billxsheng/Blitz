@@ -10,12 +10,9 @@ var userSchema = mongoose.Schema({
         email: String,
         password: {
             type: String
-    }
-    
-    //username: String,
-   // googleId: String,
-    
-
+        },
+        team: String,
+        mobile: Number    
 });
 
 var User = module.statics = module.exports = mongoose.model('User', userSchema);
@@ -49,6 +46,15 @@ module.statics.findByCredentials = function(email, password) {
         })
     });
 
+}
+
+module.exports.updateTeam = function(email, mobile, team) {
+    console.log('Updating Team');
+    return User.findOneAndUpdate({email: email}, {mobile: mobile, team: team}, (err, res) => {
+        if(err) {
+            console.log(err);
+        }
+    });
 }
 
 module.exports.getUserById = function(email, callback) {

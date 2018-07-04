@@ -12,7 +12,6 @@ var LocalStrategy = require('passport-local').Strategy;
 const url = require('url');
 const cookieParser = require('cookie-parser');
 const api = require('./api/api');
-const Team = require('./model/team-model');
 const Game = require('./model/game-model');
 const Message = require('./twilio/send');
 
@@ -167,11 +166,12 @@ api.getData().then((result) => {
                         return 0;
                     } else {
                         console.log(gameJSON.game.ID);
-                        Team.find({
+                        User.find({
                             team: gameJSON.game.awayTeam.Abbreviation
                         ,
                             team: gameJSON.game.homeTeam.Abbreviation
                         }).then((users) => {
+                            console.log(users + 'USERS ARRAY');
                             console.log(gameJSON.game.awayTeam.Abbreviation);
                             console.log(gameJSON.game.homeTeam.Abbreviation);
                             users.forEach((user) => {
@@ -182,11 +182,11 @@ api.getData().then((result) => {
                                 game: gameJSON.game.ID
                             })
                             
-                            game.save().then((game) => {
-                                console.log(`Game with ID: ${game.game} saved to DB.`)
-                            }).catch((e) => {
-                                console.log('Error! Game not saved to DB.');
-                            });
+                            // game.save().then((game) => {
+                            //     console.log(`Game with ID: ${game.game} saved to DB.`)
+                            // }).catch((e) => {
+                            //     console.log('Error! Game not saved to DB.');
+                            // });
         
                         })
                     }
