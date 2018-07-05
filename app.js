@@ -153,9 +153,9 @@ app.get('/logout', (req, res) => {
     res.render('login');
 });
 
-//setInterval(() => {
+setInterval(() => {
     send.sendParse();
-//}, 2000);
+}, 600000);
 
 
 app.listen(port, () => {

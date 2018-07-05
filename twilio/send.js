@@ -11,8 +11,8 @@ exports.send = function(mobile, homeTeamCity, homeTeamName, awayTeamCity, awayTe
     console.log('twilio method called')
     client.messages.create({
         body:`
-        BLITZ 
-                Final Score:
+        Blitz 
+                FINAL
                 ${awayTeamCity} ${awayTeamName}: ${awayScore}
                 ${homeTeamCity} ${homeTeamName}: ${homeScore}`,
         to:  mobile,
