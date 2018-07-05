@@ -15,7 +15,7 @@ const api = require('./api/api');
 const Game = require('./model/game-model');
 const Message = require('./twilio/send');
 const async = require('async');
-const algorithm = require('./algorithm/algorithm');
+const send = require('./send/send');
 
 //mongodb
 mongoose.Promise = global.Promise;
@@ -153,12 +153,13 @@ app.get('/logout', (req, res) => {
     res.render('login');
 });
 
+//setInterval(() => {
+    send.sendParse();
+//}, 2000);
+
 
 app.listen(port, () => {
     console.log(`app now up on port ${port}`);
 });
 
 
-//setInterval(() => {
-    algorithm.intervalAlg();
-//}, 2000);

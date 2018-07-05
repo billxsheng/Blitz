@@ -1,7 +1,5 @@
 const MySportsFeeds = require('mysportsfeeds-node');
 const keys = require("../db/keys");
-const request = require('request');
-const httpTransport = require('https');
 
 var msf = new MySportsFeeds("1.2", true);
 
@@ -10,6 +8,9 @@ var msf = new MySportsFeeds("1.2", true, null);
 msf.authenticate("billxsheng", keys.api.password);
 
 var today = new Date();
+
+
+
 
 exports.getData = function () {
 
@@ -24,7 +25,7 @@ exports.getData = function () {
         fordate: '20170917',
         force: true
     });
-
+    
 
 }
 
