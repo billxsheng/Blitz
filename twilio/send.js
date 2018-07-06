@@ -9,6 +9,7 @@ var client = new twilio(accountSid, authToken);
 
 exports.send = function(mobile, homeTeamCity, homeTeamName, awayTeamCity, awayTeamName, homeScore, awayScore, other) {
     console.log('twilio method called')
+    console.log(mobile);
     client.messages.create({
         body:`
         Blitz 

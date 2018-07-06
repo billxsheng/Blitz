@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-//const bcrypt = require('bcrypt-nodejs');
 const bcrypt = require('bcrypt');
 
 
@@ -50,6 +49,7 @@ module.statics.findByCredentials = function(email, password) {
 
 module.exports.updateTeam = function(email, mobile, team) {
     console.log('Updating Team');
+    console.log(mobile);
     return User.findOneAndUpdate({email: email}, {mobile: mobile, team: team}, (err, res) => {
         if(err) {
             console.log(err);

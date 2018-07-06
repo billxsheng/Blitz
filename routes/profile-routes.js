@@ -34,8 +34,13 @@ router.post('/save', urlencodedParser, (req, res) => {
             error: "Please enter a valid phone number."
         });
     } else {
+        console.log(req.body, 'b4');
+
         User.updateTeam(req.user.email, req.body.mobile, req.body.team).then(() => {
+            console.log(req.body, 'after');
             res.send('User information successfully updated!')
+        }).catch((e) => {
+            console.log(e);
         }) ;
         // Team.userExists(req.body.email).then(() => {
         //     console.log(req.user.email + "email");

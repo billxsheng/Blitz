@@ -11,10 +11,6 @@ const bodyParser = require('body-parser');
 var LocalStrategy = require('passport-local').Strategy;
 const url = require('url');
 const cookieParser = require('cookie-parser');
-const api = require('./api/api');
-const Game = require('./model/game-model');
-const Message = require('./twilio/send');
-const async = require('async');
 const send = require('./send/send');
 
 //mongodb
@@ -66,14 +62,6 @@ app.get('/', (req, res) => {
 app.get('/login', (req, res) => {
     res.render('login');
 });
-
-// app.get('/profile', (req, res) => {
-//     res.render('profile', {
-//         email: req.body.email,
-//         firstName: req.user.firstName,
-//         lastName: req.user.lastName
-//     }); 
-// });
 
 //serialize
 passport.serializeUser(function (user, done) {
@@ -155,7 +143,7 @@ app.get('/logout', (req, res) => {
 
 setInterval(() => {
     send.sendParse();
-}, 600000);
+}, 300000);
 
 
 app.listen(port, () => {

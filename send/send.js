@@ -2,8 +2,6 @@ const User = require('../model/user-model');
 const api = require('../api/api');
 const Game = require('../model/game-model');
 const Message = require('../twilio/send');
-const async = require('async');
-const circular = require('circular-json');
 
 module.exports.sendParse = async function () {
     var users = await getUsers();
@@ -21,15 +19,16 @@ module.exports.sendParse = async function () {
             const awayScore = gameCurr.awayScore;
             const homeScore = gameCurr.homeScore;
             console.log(`Parsing game ${gameId}.`);
+            console.log(gameStatus);
             //if game is finished
-            if (gameStatus === true) {
+            if (gameStatus === 'true') {
                 var gameExists = games.filter(game => (game.game == gameId));
                 if (gameExists.length === 0) {
                     users.forEach((userArr) => {
                         console.log(userArr.team === awayTeamAB, awayTeamAB);
                         console.log(userArr.team === homeTeamAB, homeTeamAB);
-                        if ((userArr.team === awayTeam) || (userArr.team === homeTeam)) {
-                            Message.send(userArr.mobile, homeTeam.City, homeTeam.Name, awayTeam.City, awayTeam.Name, homeScore, awayScore, null);
+                        if ((userArr.team === awayTeamAB) || (userArr.team === homeTeamAB)) {
+                            //Message.send(userArr.mobile, homeTeam.City, homeTeam.Name, awayTeam.City, awayTeam.Name, homeScore, awayScore, null);
                             console.log('SMS Sent');
                         }
                     })
@@ -37,9 +36,7 @@ module.exports.sendParse = async function () {
                 }
             }
         });
-
     });
-
 }
 
 async function saveGame(id) {
