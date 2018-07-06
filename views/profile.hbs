@@ -17,10 +17,13 @@
             <img src="/media/billlogo3.png">
             <h1 class="welcome">Welcome {{firstName}}! </h1>
             <div class="signedinwith">Signed in with email: {{email}}</div>
+            <div class="signedinwith">Current Number: {{mobile}}</div>
+            <div class="signedinwith">Selected Team: {{team}}</div>
+
             <br>
             <h3>Edit Team Information</h3>
             <form method="POST" action="/profile/save" class="container">
-                <input {{!-- value="6479665106" --}} name="mobile" class="phoneInput" type="tel" placeholder="Mobile Number" autofocus autocomplete="off">
+                <input name="mobile" class="phoneInput" type="tel" placeholder="Mobile Number" autofocus autocomplete="off">
 
                 <div class="form-group team-selector">
                     <h3 class="teamSelect">Select a team</h3>

@@ -16,13 +16,23 @@ const authCheck = (req, res, next) => {
 };
 
 router.get('/', ensureAuthenticated, (req, res) => {
-    res.render('profile', {
-        firstName: req.user.firstName,
-        lastName: req.user.lastName,
-        email: req.user.email,
-        mobile: req.user.mobile,
-        team: req.user.team
-    });
+    if (req.user.mobile === null || req.user.team === null) {
+        res.render('profile', {
+            firstName: req.user.firstName,
+            lastName: req.user.lastName,
+            email: req.user.email,
+            mobile: 'Not assigned!',
+            team: 'Not selected!'
+        });
+    } else {
+        res.render('profile', {
+            firstName: req.user.firstName,
+            lastName: req.user.lastName,
+            email: req.user.email,
+            mobile: req.user.mobile,
+            team: req.user.team
+        });
+    }
 });
 
 router.post('/save', urlencodedParser, (req, res) => {
@@ -36,12 +46,18 @@ router.post('/save', urlencodedParser, (req, res) => {
     } else {
         console.log(req.body, 'b4');
 
-        User.updateTeam(req.user.email, req.body.mobile, req.body.team).then(() => {
+        User.updateTeam(req.user.email, req.body.mobile, req.body.team).then((user) => {
             console.log(req.body, 'after');
-            res.send('User information successfully updated!')
+            res.render('profile', {
+                firstName: req.user.firstName,
+                lastName: req.user.lastName,
+                email: req.user.email,
+                mobile: user.mobile,
+                team: user.team
+            });
         }).catch((e) => {
             console.log(e);
-        }) ;
+        });
         // Team.userExists(req.body.email).then(() => {
         //     console.log(req.user.email + "email");
         //     var team = new Team();

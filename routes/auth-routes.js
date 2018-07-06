@@ -51,9 +51,9 @@ router.post('/signup/local', urlencodedParser, (req, res) => {
     };
     console.log('after validation');
     var user = new User();
-    user.firstName = req.body.firstName;
-    user.lastName =req.body.lastName;
-    user.email = req.body.email;
+    user.firstName = capitalizeName(req.body.firstName);
+    user.lastName =capitalizeName(req.body.lastName);
+    user.email = lcEmail(req.body.email);
     user.mobile = null;
     user.team = null;
     //username
@@ -91,6 +91,18 @@ router.post('/signup/local', urlencodedParser, (req, res) => {
         });
     });
 }); 
+
+function capitalizeName(name) {
+    var firstLetter = name.substr(0,1).toUpperCase();
+    var remaining = name.substr(1).toLowerCase();
+    var newString = firstLetter + remaining
+    return newString
+}
+
+function lcEmail(email) {
+    var newEmail = email.toLowerCase();
+    return newEmail;
+}
 
 //google callback route
 router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
