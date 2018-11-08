@@ -1,2 +1,12 @@
 # Blitz
-<b>Blitz:</b> SMS-based NFL notification system that notifies users with no cellular data on real-time game scores. 🏈
+<br>
+<b>Technologies used:</b>
+<br>
+HTML/CSS
+<br>
+Node.js
+<br>
+Twilio API
+<br>
+MySportsFeeds API
+<br>
