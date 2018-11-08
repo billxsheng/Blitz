@@ -1,5 +1,4 @@
 # Blitz
-<br>
 <b>Technologies used:</b>
 <br>
 HTML/CSS
