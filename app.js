@@ -124,15 +124,7 @@ app.post('/login/redirect', [urlencodedParser, inputCheck, accountCheck,
         passport.authenticate('local-login')
     ],
     function (req, res) {
-        console.log('redirect');
-        res.redirect(url.format({
-            pathname: "/profile/",
-            query: {
-                "fn": req.user.firstName,
-                "ln": req.user.lastName,
-                "email": req.body.email
-            }
-        }));
+        res.redirect('/profile')
     });
 
 

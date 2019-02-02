@@ -93,7 +93,7 @@
 .home-main {
     background-color: #fff;
     width: 400px !important;
-    height: 440px;
+    height: 470px;
     position: relative;
     top: 130px;
     border-top-left-radius: 30px;
@@ -137,14 +137,14 @@ input {
 }
 
 .main-signup {
-    height: 100vh;
+    height: 140vh;
      background: -webkit-linear-gradient(bottom left, #6c1cbc, rgba(94, 175, 244, 0.69));
 }
 
 .signup-main {
     background-color: #fff;
     width: 400px !important;
-    height: 620px;
+    height: 700px;
     position: relative;
     top: 130px;
     border-top-left-radius: 30px;
@@ -252,6 +252,10 @@ input {
 .btn-logout {
     position: relative;
     top: 20px;
+}
+
+.btn-logout:hover {
+    color: black;
 }
 
 .error {
