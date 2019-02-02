@@ -9,11 +9,6 @@ var nodemailer = require('nodemailer');
 router.use(bodyParser.json());
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
-//auth login
-router.get('/signupredirect', (req, res) => {
-    res.render('signupredirect');
-});
-
 router.get('/signup', (req, res) => {
     res.render('signup');
 });
@@ -56,7 +51,6 @@ router.post('/signup/local', urlencodedParser, (req, res) => {
     user.email = lcEmail(req.body.email);
     user.mobile = null;
     user.team = null;
-    //username
     user.password = req.body.password;
     User.emailVeri(req.body.email).then(() => {
         console.log(1);
@@ -75,19 +69,6 @@ router.post('/signup/local', urlencodedParser, (req, res) => {
             user.save().then(() => {
                 res.render('login');
             });
-            // var transporter = nodemailer.createTransport({
-            //     service: 'gmail',
-            //     auth: {
-            //       user: 'billxsheng@gmail.com',
-            //       pass: ''
-            //     }
-            //   });
-            //   var mailOptions = {
-            //     from: 'youremail@gmail.com',
-            //     to: user.email,
-            //     subject: 'Sending Email using Node.js',
-            //     text: 'ezpz'
-            //   };
         });
     });
 }); 
@@ -103,19 +84,5 @@ function lcEmail(email) {
     var newEmail = email.toLowerCase();
     return newEmail;
 }
-
-//google callback route
-router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
-    res.redirect('/profile');
-});
-
-//auth with google
-router.get('/google', passport.authenticate("google", {
-    scope: ['profile']
-}), (req, res) => {
-    //handle with passport
-    res.send('logging in with google');
-});
-
 
 module.exports = router;
