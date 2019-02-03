@@ -130,7 +130,7 @@ app.post('/login/redirect', [urlencodedParser, inputCheck, accountCheck,
 
 app.get('/logout', (req, res) => {
     req.logout();
-    res.render('login');
+    res.redirect('/login');
 });
 
 setInterval(() => {
