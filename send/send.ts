@@ -1,6 +1,6 @@
-import {User} from '../model/user.model';
+import User from '../model/user.model';
 import MSFConnect from '../api/api';
-import {Game} from '../model/game.model';
+import Game from '../model/game.model';
 // const Message = require('../twilio/config');
 
 export class SendSMS {
@@ -61,19 +61,12 @@ export class SendSMS {
     getUsers() {
         return User.find({}).then((users) => {
             return users;
-        }).catch(() => {
-            console.log('error');
-            return 'an error occured users';
         })
-    
     }
     
     getGames() {
         return Game.find({}).then((games) => {
             return games;
-        }).catch(() => {
-            console.log('error');
-            return 'an error occured games';
         })
     }
     

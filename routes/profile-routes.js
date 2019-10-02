@@ -2,9 +2,8 @@ const router = require('express').Router();
 const bodyParser = require('body-parser');
 const User = require('../model/user-model');
 
-
 router.use(bodyParser.json());
-var urlencodedParser = bodyParser.urlencoded({
+let urlencodedParser = bodyParser.urlencoded({
     extended: false
 });
 const authCheck = (req, res, next) => {

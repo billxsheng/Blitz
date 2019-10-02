@@ -1,9 +1,8 @@
-import mongoose from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 import bcrypt from 'bcrypt';
+import { IUser } from '../interfaces/interfaces';
 
-
-
-var userSchema = new mongoose.Schema({
+const UserSchema: Schema = new mongoose.Schema({
         firstName:  String,
         lastName: String,
         email: String,
@@ -14,7 +13,7 @@ var userSchema = new mongoose.Schema({
         mobile: Number    
 });
 
-export const User = mongoose.model('User', userSchema);
+export default mongoose.model<IUser>('User', UserSchema);
 
 export function emailVeri(email) {
     let User = this;
@@ -48,7 +47,7 @@ export function findByCredentials(email, password) {
 export function updateTeam(email, mobile, team) {
     console.log('Updating Team');
     console.log(mobile);
-    return User.findOneAndUpdate({email: email}, {mobile: mobile, team: team}, (err, res) => {
+    return this.UserSchema.findOneAndUpdate({email: email}, {mobile: mobile, team: team}, (err, res) => {
         if(err) {
             console.log(err);
         }
@@ -57,6 +56,6 @@ export function updateTeam(email, mobile, team) {
 
 export function getUserById(email, callback) {
     let query = {email: email};
-    return User.findOne(query, callback);
+    return this.UserSchema.findOne(query, callback);
 };
 

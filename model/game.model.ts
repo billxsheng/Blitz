@@ -1,10 +1,11 @@
-import mongoose from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
+import { IGame } from '../interfaces/interfaces';
 
-let gameSchema = new mongoose.Schema({
+const GameSchema: Schema = new mongoose.Schema({
     game: Number
 });
 
-export const Game = mongoose.model('Game', gameSchema)
+export default mongoose.model<IGame>('User', GameSchema);
 
 export function gameExists(game) {
     let Game = this;

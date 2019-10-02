@@ -1,5 +1,5 @@
 import passport from 'passport';
-import {User} from '../model/user.model';
+import User from '../model/user.model';
 
 passport.serializeUser((user, done) => {
     done(null, user);

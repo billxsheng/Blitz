@@ -3,11 +3,11 @@ const passport = require('passport');
 const bodyParser = require('body-parser');
 const User = require('../model/user.model');
 const bcrypt = require('bcrypt');
-var nodemailer = require('nodemailer');
+const nodemailer = require('nodemailer');
 
 //body-parser stuff
 router.use(bodyParser.json());
-var urlencodedParser = bodyParser.urlencoded({ extended: false });
+let urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 router.get('/signup', (req, res) => {
     res.render('signup');
@@ -45,7 +45,7 @@ router.post('/signup/local', urlencodedParser, (req, res) => {
         });
     };
     console.log('after validation');
-    var user = new User();
+    let user = new User();
     user.firstName = capitalizeName(req.body.firstName);
     user.lastName =capitalizeName(req.body.lastName);
     user.email = lcEmail(req.body.email);
@@ -74,14 +74,14 @@ router.post('/signup/local', urlencodedParser, (req, res) => {
 }); 
 
 function capitalizeName(name) {
-    var firstLetter = name.substr(0,1).toUpperCase();
-    var remaining = name.substr(1).toLowerCase();
-    var newString = firstLetter + remaining
+    let firstLetter = name.substr(0,1).toUpperCase();
+    let remaining = name.substr(1).toLowerCase();
+    let newString = firstLetter + remaining
     return newString
 }
 
 function lcEmail(email) {
-    var newEmail = email.toLowerCase();
+    let newEmail = email.toLowerCase();
     return newEmail;
 }
 
