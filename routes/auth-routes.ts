@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const passport = require('passport');
 const bodyParser = require('body-parser');
-const User = require('../model/user-model');
+const User = require('../model/user.model');
 const bcrypt = require('bcrypt');
 var nodemailer = require('nodemailer');
 

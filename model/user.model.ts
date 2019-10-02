@@ -1,9 +1,9 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+import mongoose from 'mongoose';
+import bcrypt from 'bcrypt';
 
 
 
-var userSchema = mongoose.Schema({
+var userSchema = new mongoose.Schema({
         firstName:  String,
         lastName: String,
         email: String,
@@ -14,20 +14,19 @@ var userSchema = mongoose.Schema({
         mobile: Number    
 });
 
-var User = module.statics = module.exports = mongoose.model('User', userSchema);
+export const User = mongoose.model('User', userSchema);
 
-module.statics.emailVeri = function(email) {
-    var User = this;
+export function emailVeri(email) {
+    let User = this;
     return User.findOne({email}).then((user) => {
         if(user) {
             return Promise.reject();
         }
     })
-};
+} 
 
-
-module.statics.findByCredentials = function(email, password) {
-    var User = this;
+export function findByCredentials(email, password) {
+    let User = this;
     return User.findOne({email: email}).then((user) => {
         console.log(user);
         if(!user) {
@@ -44,10 +43,9 @@ module.statics.findByCredentials = function(email, password) {
             });
         })
     });
+} 
 
-}
-
-module.exports.updateTeam = function(email, mobile, team) {
+export function updateTeam(email, mobile, team) {
     console.log('Updating Team');
     console.log(mobile);
     return User.findOneAndUpdate({email: email}, {mobile: mobile, team: team}, (err, res) => {
@@ -55,10 +53,10 @@ module.exports.updateTeam = function(email, mobile, team) {
             console.log(err);
         }
     });
-}
+} 
 
-module.exports.getUserById = function(email, callback) {
-var query = {email: email};
-return User.findOne(query, callback);
+export function getUserById(email, callback) {
+    let query = {email: email};
+    return User.findOne(query, callback);
 };
 

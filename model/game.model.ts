@@ -1,13 +1,13 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-var gameSchema = mongoose.Schema({
+let gameSchema = new mongoose.Schema({
     game: Number
 });
 
-var Game = module.statics = module.exports = mongoose.model('Game', gameSchema);
+export const Game = mongoose.model('Game', gameSchema)
 
-module.statics.gameExists = function(game) {
-    var Game = this;
+export function gameExists(game) {
+    let Game = this;
     return Game.findOne({game}).then((game) => {
         if(game) {
             console.log('game found');
@@ -17,4 +17,5 @@ module.statics.gameExists = function(game) {
             Promise.resolve();
         }
     })
-};
+}
+
