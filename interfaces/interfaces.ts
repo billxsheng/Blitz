@@ -7,6 +7,7 @@ export interface IUser extends Document {
     password: String;
     team: String;
     mobile: Number; 
+    updateTeam();
 }
 
 export interface IGame extends Document {

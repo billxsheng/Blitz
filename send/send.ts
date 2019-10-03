@@ -3,7 +3,7 @@ import MSFConnect from '../api/api';
 import Game from '../model/game.model';
 // const Message = require('../twilio/config');
 
-export class SendSMS {
+export default class SendSMS {
     msfConnect: MSFConnect;
     constructor() {
         this.msfConnect = new MSFConnect();
