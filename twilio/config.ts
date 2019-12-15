@@ -11,8 +11,6 @@ export class TwilioConfig {
     }
 
     send(mobile, homeTeamCity, homeTeamName, awayTeamCity, awayTeamName, homeScore, awayScore, other) {
-        console.log('twilio method called')
-        console.log(mobile);
         this.client.messages.create({
             body: `
             Blitz 
@@ -22,7 +20,6 @@ export class TwilioConfig {
             to: mobile,
             from: keys.twilio.twilioNum
         }).then((message) => {
-            console.log(message.sid);
         });
     } 
 }

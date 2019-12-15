@@ -14,28 +14,22 @@ export default class SendSMS {
         let games = await this.getGames();
         this.msfConnect.getData().then((gameData) => {
             const gameArray = gameData.scoreboard.gameScore
-            //for each game
             gameArray.forEach((gameCurr) => {
                 const gameId = gameCurr.game.ID;
                 const gameStatus = gameCurr.isCompleted;
-                const awayTeamAB = gameCurr.game.awayTeam.Abbreviation;
-                const homeTeamAB = gameCurr.game.homeTeam.Abbreviation;
-                const awayTeam = gameCurr.game.awayTeam;
-                const homeTeam = gameCurr.game.homeTeam;
-                const awayScore = gameCurr.awayScore;
-                const homeScore = gameCurr.homeScore;
-                console.log(`Parsing game ${gameId}.`);
-                console.log(gameStatus);
+                // const awayTeamAB = gameCurr.game.awayTeam.Abbreviation;
+                // const homeTeamAB = gameCurr.game.homeTeam.Abbreviation;
+                // const awayTeam = gameCurr.game.awayTeam;
+                // const homeTeam = gameCurr.game.homeTeam;
+                // const awayScore = gameCurr.awayScore;
+                // const homeScore = gameCurr.homeScore;
                 if (gameStatus === 'true') {
                     let gameExists = games.filter(game => (game.game == gameId));
                     if (gameExists.length === 0) {
-                        users.forEach((userArr) => {
-                            console.log(userArr.team === awayTeamAB, awayTeamAB);
-                            console.log(userArr.team === homeTeamAB, homeTeamAB);
-                            if ((userArr.team === awayTeamAB) || (userArr.team === homeTeamAB)) {
-                                console.log('SMS Sent');
-                            }
-                        })
+                        // users.forEach((userArr) => {
+                        //     if ((userArr.team === awayTeamAB) || (userArr.team === homeTeamAB)) {
+                        //     }
+                        // })
                         this.saveGame(gameId);
                     }
                 }
@@ -50,11 +44,7 @@ export default class SendSMS {
             let game = new Game({
                 game: id
             })
-            game.save().then((game) => {
-                console.log('Game saved to DB.', game);
-            }).catch((e) => {
-                console.log(e);
-            })
+            game.save();
         }
     }
 

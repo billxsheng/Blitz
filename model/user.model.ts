@@ -32,13 +32,11 @@ UserSchema.method('emailVeri', function(email) {
 UserSchema.method('findByCredentials', function(email, password) {
     let User = this;
     return User.findOne({email: email}).then((user) => {
-        console.log(user);
         if(!user) {
             return Promise.reject();
         }
         return new Promise((resolve, reject) => {
             bcrypt.compare(password, user.password, (err, res) => {
-                console.log(res);
                 if(res) {
                     resolve(user);
                 } else {
@@ -54,7 +52,7 @@ UserSchema.method('updateTeam', function(email, mobile, team) {
     console.log(mobile);
     return this.UserSchema.findOneAndUpdate({email: email}, {mobile: mobile, team: team}, (err, res) => {
         if(err) {
-            console.log(err);
+            Promise.reject();
         }
     });
 });
