@@ -1,2 +1,2 @@
 # Blitz
-A notification system that leverages Twilio microservices to send live SMS game updates to offline users. Built with TypeScript, Node.js, and MongoDB. 🏈
+A notification system for NFL fans that leverages Twilio microservices to send live SMS game updates to offline users. Users have the option of authenticating using OAuth 2.0 or by username and password. From there, they can fill in their contact information in addition to the NFL teams they wish to follow. Afterwards, they will recieve real-time notifications on the NFL teams they follow through SMS texts on their mobile phone. Built with TypeScript, Node.js, and MongoDB. 🏈
