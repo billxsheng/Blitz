@@ -11,7 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "@types/mongoose": "^5.5.34",
-    "async": "^2.6.1",
+    "async": "^2.6.4",
     "bcrypt": "^3.0.4",
     "bcrypt-nodejs": "0.0.3",
     "btoa": "^1.2.1",
